@@ -9,6 +9,7 @@ class Api::TransactionController < ApplicationController
   def create
     #raise params.inspect
     @transaction = Transaction.create(transaction_params)
+    @debts = Array.new()
     
     params[:debtors].each do |debtor|
       debt_user = User.find_by_facebook_id( debtor[:facebook_id] )
@@ -17,8 +18,14 @@ class Api::TransactionController < ApplicationController
         debt_user = User.create( :name => debtor[:name], :facebook_id => debtor[:facebook_id] )
       end
       
-      Debt.create( :amount => debtor[:amount], :debtor => debtor[:facebook_id], :creditor => params[:creditor], :transaction_id => @transaction.id )  
+      debt = Debt.create( :amount => debtor[:amount], :debtor => debtor[:facebook_id], :creditor => params[:creditor], :transaction_id => @transaction.id )  
+      @debts << debt
     end
+    
+    respond_to do |format|
+      format.json{render :json => { "transaction" => @transaction, "debts" => @debts }}
+    end
+    
   end
   
   private

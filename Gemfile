@@ -5,8 +5,13 @@ gem 'rails', '4.0.2'
 
 gem 'rails-api'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# use thin as the app server
+gem 'thin'
+
+gem 'fb_graph'
+
+# Use pg as the database for Active Record
+gem 'pg'
 
 
 # To use ActiveModel has_secure_password

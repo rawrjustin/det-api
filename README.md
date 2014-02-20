@@ -7,7 +7,7 @@ All endpoints accept and return JSON
 
 ### Login
 
-####_POST_ `/api/login`
+####_POST_  `/api/login`
 
 Logs in (or signs up if user is new) the user and passes back the user object Pass in a JSON object with key `authToken` and the access token provided by facebookSDK login
 
@@ -17,22 +17,23 @@ Parameters:
 
 Response:
 
-    {"id":2,
-    "name":"Justin Huang",
-    "facebook_id":"1141801215",
-    "email":"justingotemail@gmail.com",
-    "token":null,
-    "created_at":"2014-02-20T18:14:54.000Z",
-    "updated_at":"2014-02-20T18:14:54.000Z"}
+    { "id":2,
+      "name":"Justin Huang",
+      "facebook_id":"1141801215",
+      "email":"justingotemail@gmail.com",
+      "token":null,
+      "created_at":"2014-02-20T18:14:54.000Z",
+      "updated_at":"2014-02-20T18:14:54.000Z"
+    }
 
 
-####_POST_ `/api/transaction`
+####_POST_  `/api/transaction`
 
 Creates a new transaction
 
 Parameters:
 
-    {"debtors": [ 
+    { "debtors": [ 
         { "name" : "allen",
           "facebook_id" : "571815533",
           "amount" : "9282"
@@ -71,7 +72,7 @@ Response:
     }
 
 
-####_GET_ `/api/debts?facebook_id=XXXXXX`
+####_GET_  `/api/debts?facebook_id=XXXXXX`
 
 Response:
 

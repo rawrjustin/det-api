@@ -1,9 +1,11 @@
 DetApi::Application.routes.draw do
   
   namespace :api do
-    resources :transactions, only: [:index, :show, :create]
-    resources :debts, only: [:index, :show]
     post "/login" => "login#authenticate"
+    
+    post "/transaction" => "transaction#create"
+  
+    get "/debts" => "debt#index"
   end  
   
   # The priority is based upon order of creation: first created -> highest priority.

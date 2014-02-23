@@ -1,11 +1,13 @@
 class Api::DebtController < ApplicationController
+  before_action :authenticate
+  
   def create
     @debt = Debt.create(debt_params)
   end
   
   def index
-    debts = Debt.where(debtor: params[:facebook_id])
-    credits = Debt.where(creditor: params[:facebook_id])
+    debts = Debt.where(debtor: @current_user.facebook_id)
+    credits = Debt.where(creditor: @current_user.facebook_id)
     
     list = debts + credits
     respond_to do |format|

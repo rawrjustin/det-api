@@ -3,7 +3,9 @@ ____________________
 
 ## Endpoints
 
-All endpoints accept and return JSON
+All endpoints accept and return JSON.
+All endpoints are authenticated via token authentication and must include this header with valid token returned by login
+`Authorization: Token token="a3caf3291c5b0469f2bb04e360438211"`
 
 ### Login
 
@@ -21,7 +23,7 @@ Response:
       "name":"Justin Huang",
       "facebook_id":"1141801215",
       "email":"justingotemail@gmail.com",
-      "token":null,
+      "token":"a3caf3291c5b0469f2bb04e360438211",
       "created_at":"2014-02-20T18:14:54.000Z",
       "updated_at":"2014-02-20T18:14:54.000Z"
     }
@@ -29,7 +31,7 @@ Response:
 
 ####_POST_  `/api/transaction`
 
-Creates a new transaction
+Creates a new transaction. You are always the creditor.
 
 Parameters:
 
@@ -43,7 +45,6 @@ Parameters:
           "amount" : "130"
         }],
       "transaction" : { "description" : "OMG RAILS API BITCHES"},
-      "creditor": "1141801215"
     }
 
 Response:
@@ -72,7 +73,9 @@ Response:
     }
 
 
-####_GET_  `/api/debts?facebook_id=XXXXXX`
+####_GET_  `/api/debts`
+
+Gets a list of debts that you are involved with. 
 
 Response:
 
@@ -106,3 +109,8 @@ Response:
         "updated_at":"2014-02-20T21:16:06.000Z",
         "transaction_id":3}
     ]
+
+
+####_GET_  `/api/debts/{facebook_id}`
+
+not complete

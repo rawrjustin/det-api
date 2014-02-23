@@ -17,10 +17,4 @@ class Api::LoginController < ApplicationController
     end
   end
   
-  def login_params
-    params.require(:person).permit(:name, :age)
-  end
-  
-  
-  
 end

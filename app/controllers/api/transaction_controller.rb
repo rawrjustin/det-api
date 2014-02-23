@@ -1,4 +1,5 @@
 class Api::TransactionController < ApplicationController
+  before_action :authenticate
   
   def index
   end
@@ -18,7 +19,7 @@ class Api::TransactionController < ApplicationController
         debt_user = User.create( :name => debtor[:name], :facebook_id => debtor[:facebook_id] )
       end
       
-      debt = Debt.create( :amount => debtor[:amount], :debtor => debtor[:facebook_id], :creditor => params[:creditor], :transaction_id => @transaction.id )  
+      debt = Debt.create( :amount => debtor[:amount], :debtor => debtor[:facebook_id], :creditor => @current_user.facebook_id, :transaction_id => @transaction.id )  
       @debts << debt
     end
     
@@ -29,10 +30,9 @@ class Api::TransactionController < ApplicationController
   end
   
   private
-
-  def transaction_params
-    params.require(:transaction).permit(:description)
-  end
+    def transaction_params
+      params.require(:transaction).permit(:description)
+    end
 end
 
 # 
